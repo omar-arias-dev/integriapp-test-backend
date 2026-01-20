@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Enum
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.core.dabatase import Base
 from app.enum.RouteStatus import RouteStatus
@@ -21,3 +22,10 @@ class Route(Base):
     completed_at = Column(DateTime(timezone=True), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+    performance = relationship(
+        "Performance",
+        back_populates="route",
+        uselist=False,
+        cascade="all, delete-orphan"
+    )

@@ -5,6 +5,7 @@ from typing import List, Optional
 from app.core.dabatase import get_db
 from app.service.RouteService import RouteService
 from app.schema.Route import RouteCreate, RouteUpdate, RouteResponse
+from app.schema.RouteComplete import RouteComplete
 from app.enum.RouteStatus import RouteStatus
 
 router = APIRouter(
@@ -63,3 +64,12 @@ def delete_route(
     service: RouteService = Depends(get_route_service)
 ):
     return service.delete_route(route_id)
+
+@router.patch("/{route_id}/complete", status_code=status.HTTP_200_OK)
+def complete_route(
+    route_id: int,
+    payload: RouteComplete,
+    service: RouteService = Depends(get_route_service)
+):
+    return service.complete_route(route_id, payload)
+
