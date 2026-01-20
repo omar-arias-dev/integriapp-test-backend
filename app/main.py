@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.configuration.configuration import settings
 from app.core.dabatase import engine, Base
-from app.controller import VehicleController
+from app.controller import VehicleController, RouteController
 
 
 Base.metadata.create_all(bind=engine)
@@ -25,6 +25,7 @@ app.add_middleware(
 )
 
 app.include_router(VehicleController.router)
+app.include_router(RouteController.router)
 
 @app.get("/health")
 def health_check():
