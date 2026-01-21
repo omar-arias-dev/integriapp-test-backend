@@ -7,7 +7,7 @@ class PerformanceBase(BaseModel):
     route_id: int = Field(..., description="ID de la ruta asociada")
     distance_km: float = Field(..., gt=0, description="Distancia recorrida en kilómetros")
     fuel_consumed: float = Field(..., ge=0, description="Combustible consumido")
-    duration_minutes: int = Field(..., gt=0, description="Duración del viaje en minutos")
+    duration: int = Field(..., gt=0, description="Duración del viaje en minutos")
     notes: Optional[str] = Field(None, description="Notas adicionales del performance")
 
 
